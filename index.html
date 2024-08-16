@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sugestão de Produto com Desconto</title>
+    <title>Sugestão de Receita</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <header>
-        <h1>Sugestão de Produto com Desconto</h1>
+        <h1>Sugestão de Receita</h1>
     </header>
     <div class="container">
         <form method="post">
@@ -51,8 +51,7 @@
         {% endif %}
 
         {% if sugestao %}
-            <h2>O produto que a AI escolheria para dar desconto seria
-            :</h2>
+            <h2>Baseado nas suas escolhas, recomendamos:</h2>
             <p><strong>{{ sugestao }}</strong></p>
             
             <h3>Ingredientes:</h3>
