@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escolha seus Pedidos Anteriores</title>
+</head>
+<body>
+    <h1>Escolha 3 Pedidos Anteriores</h1>
+    <form method="POST">
+        <label for="pedido1">Pedido 1:</label>
+        <select name="pedido1">
+            <option value="" selected disabled>Selecione um pedido</option>
+            {% for receita, detalhes in receitas.items() %}
+                <option value="{{ receita }}">{{ receita }}</option>
+            {% endfor %}
+        </select>
+        <br><br>
+
+        <label for="pedido2">Pedido 2:</label>
+        <select name="pedido2">
+            <option value="" selected disabled>Selecione um pedido</option>
+            {% for receita, detalhes in receitas.items() %}
+                <option value="{{ receita }}">{{ receita }}</option>
+            {% endfor %}
+        </select>
+        <br><br>
+
+        <label for="pedido3">Pedido 3:</label>
+        <select name="pedido3">
+            <option value="" selected disabled>Selecione um pedido</option>
+            {% for receita, detalhes in receitas.items() %}
+                <option value="{{ receita }}">{{ receita }}</option>
+            {% endfor %}
+        </select>
+        <br><br>
+
+        <button type="submit">Enviar</button>
+    </form>
+
+    {% if escolhas %}
+        <h2>Suas Escolhas:</h2>
+        <ul>
+            {% for escolha in escolhas %}
+                <li><strong>{{ escolha }}</strong><br>
+                    Ingredientes: {{ receitas[escolha]["ingredientes"] }}<br>
+                    Avaliação: {{ receitas[escolha]["avaliacao"] }}<br>
+                    Número de Pedidos: {{ receitas[escolha]["num_pedidos"] }}
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    {% if sugestao %}
+        <h2>Baseado nas suas escolhas, recomendamos:</h2>
+        <p><strong>{{ sugestao }}</strong> com um desconto especial!</p>
+        <p>Ingredientes: {{ receitas[sugestao]["ingredientes"] }}</p>
+        <p>Avaliação: {{ receitas[sugestao]["avaliacao"] }}</p>
+        <p>Número de Pedidos: {{ receitas[sugestao]["num_pedidos"] }}</p>
+    {% endif %}
+</body>
+</html>
