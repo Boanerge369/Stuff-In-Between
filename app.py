@@ -40,6 +40,9 @@ receitas = {
     "Escondidinho": {"ingredientes": ["batata", "carne", "queijo", "creme de leite", "alho"], "avaliacao": 4.7, "num_pedidos": 100},
 }
 
+# Lista para armazenar as sugestões já feitas
+sugestoes_feitas = set()
+
 def sugerir_receita(escolhas):
     ingredientes_escolhidos = []
     for escolha in escolhas:
@@ -47,7 +50,7 @@ def sugerir_receita(escolhas):
     
     ingredientes_contados = Counter(ingredientes_escolhidos)
     
-    receitas_possiveis = {k: v for k, v in receitas.items() if k not in escolhas}
+    receitas_possiveis = {k: v for k, v in receitas.items() if k not in escolhas and k not in sugestoes_feitas}
     
     similaridades = {}
     for receita, detalhes in receitas_possiveis.items():
@@ -55,10 +58,13 @@ def sugerir_receita(escolhas):
         score = similaridade * detalhes["avaliacao"] * (1 + detalhes["num_pedidos"] / 100)
         similaridades[receita] = score
     
-    melhor_receita = max(similaridades, key=similaridades.get)
-    ingredientes_similares = [ing for ing in receitas[melhor_receita]["ingredientes"] if ing in ingredientes_contados]
-    
-    return melhor_receita, ingredientes_similares
+    if similaridades:
+        melhor_receita = max(similaridades, key=similaridades.get)
+        sugestoes_feitas.add(melhor_receita)
+        ingredientes_similares = [ing for ing in receitas[melhor_receita]["ingredientes"] if ing in ingredientes_contados]
+        return melhor_receita, ingredientes_similares
+    else:
+        return None, []
 
 @app.route('/', methods=['GET', 'POST'])
 def index():

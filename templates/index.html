@@ -14,6 +14,7 @@
         <form method="post">
             <label for="pedido1">Pedido 1:</label>
             <select name="pedido1" id="pedido1">
+                <option value="">Selecione uma receita</option>
                 {% for receita in receitas.keys() %}
                     <option value="{{ receita }}">{{ receita }}</option>
                 {% endfor %}
@@ -21,6 +22,7 @@
 
             <label for="pedido2">Pedido 2:</label>
             <select name="pedido2" id="pedido2">
+                <option value="">Selecione uma receita</option>
                 {% for receita in receitas.keys() %}
                     <option value="{{ receita }}">{{ receita }}</option>
                 {% endfor %}
@@ -28,6 +30,7 @@
 
             <label for="pedido3">Pedido 3:</label>
             <select name="pedido3" id="pedido3">
+                <option value="">Selecione uma receita</option>
                 {% for receita in receitas.keys() %}
                     <option value="{{ receita }}">{{ receita }}</option>
                 {% endfor %}
@@ -51,8 +54,7 @@
         {% endif %}
 
         {% if sugestao %}
-            <h2>O produto que a AI escolheria para dar desconto seria
-            :</h2>
+            <h2>O produto que a AI escolheria para dar desconto seria:</h2>
             <p><strong>{{ sugestao }}</strong></p>
             
             <h3>Ingredientes:</h3>
